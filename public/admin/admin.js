@@ -1,19 +1,28 @@
-const ADMIN_USERNAME = "admin"
-const ADMIN_PASSWORD = "jadwalmisa2025"
-
 // Login function
 const loginBtn = document.getElementById("login-btn")
 const errorMsg = document.getElementById("error-msg")
 
 if (loginBtn) {
-    loginBtn.addEventListener("click", function() {
+    loginBtn.addEventListener("click", async function() {
         const username = document.getElementById("username").value
         const password = document.getElementById("password").value
-        if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
-            localStorage.setItem("isAdmin", "true")
+
+        const response = await fetch("/api/auth/login", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ username, password })
+        })
+
+        const data = await response.json()
+
+        if (response.ok) {
+            localStorage.setItem("adminToken", data.token)
+            localStorage.setItem("adminRole", data.role)
+            localStorage.setItem("adminChurchId", data.churchId)
+            localStorage.setItem("adminChurchName", data.churchName)
             window.location.href = "/admin"
         } else {
-            errorMsg.innerHTML = "❌ Username atau password salah!"
+            errorMsg.innerHTML = data.message
         }
     })
 }
@@ -23,14 +32,13 @@ const logoutBtn = document.getElementById("logout-btn")
 const churchListAdmin = document.getElementById("church-list-admin")
 
 if (churchListAdmin) {
-    if (localStorage.getItem("isAdmin") !== "true") {
+    if (!localStorage.getItem("adminToken")) {  // ← updated
         window.location.href = "/admin/login"
     } else {
         loadChurches()
     }
 }
 
-// ← ADD THIS
 const addChurchBtn = document.getElementById("add-church-btn")
 if (addChurchBtn) {
     addChurchBtn.addEventListener("click", function() {
@@ -40,7 +48,10 @@ if (addChurchBtn) {
 
 if (logoutBtn) {
     logoutBtn.addEventListener("click", function() {
-        localStorage.removeItem("isAdmin")
+        localStorage.removeItem("adminToken")   // ← updated
+        localStorage.removeItem("adminRole")
+        localStorage.removeItem("adminChurchId")
+        localStorage.removeItem("adminChurchName")
         window.location.href = "/admin/login"
     })
 }
@@ -66,8 +77,12 @@ async function loadChurches() {
 }
 
 async function deleteChurch(id) {
+    const token = localStorage.getItem("adminToken")
     if (confirm("Yakin mau hapus gereja ini?")) {
-        await fetch(`/churches/${id}`, { method: "DELETE" })
+        await fetch(`/churches/${id}`, {
+            method: "DELETE",
+            headers: { "authorization": token }  // ← add token
+        })
         loadChurches()
     }
 }
@@ -81,7 +96,6 @@ const saveBtn = document.getElementById("save-btn")
 const addExtraBtn = document.getElementById("add-extra-btn")
 let extraSchedules = []
 
-// Helper functions
 function toArray(str) {
     if (!str || str.trim() === "") return []
     return str.split(",").map(t => t.trim()).filter(t => t !== "")
@@ -93,7 +107,7 @@ function toStr(arr) {
 }
 
 if (saveBtn) {
-    if (localStorage.getItem("isAdmin") !== "true") {
+    if (!localStorage.getItem("adminToken")) {  // ← updated
         window.location.href = "/admin/login"
     } else {
         loadChurchData()
@@ -116,7 +130,6 @@ async function loadChurchData() {
     document.getElementById("edit-friday").value = toStr(church.schedule.friday)
     document.getElementById("edit-saturday").value = toStr(church.schedule.saturday)
 
-    // Load extra schedules
     extraSchedules = church.extraSchedule || []
     renderExtraSchedules()
 }
@@ -178,7 +191,6 @@ if (addExtraBtn) {
             isActive: true
         })
 
-        // Clear inputs
         document.getElementById("extra-title").value = ""
         document.getElementById("extra-date").value = ""
         document.getElementById("extra-time").value = ""
@@ -190,6 +202,7 @@ if (addExtraBtn) {
 if (saveBtn) {
     saveBtn.addEventListener("click", async function() {
         const id = window.location.pathname.split("/")[3]
+        const token = localStorage.getItem("adminToken")  // ← add token
         const updatedChurch = {
             name: document.getElementById("edit-name").value,
             location: document.getElementById("edit-location").value,
@@ -208,7 +221,10 @@ if (saveBtn) {
 
         await fetch(`/churches/${id}`, {
             method: "PUT",
-            headers: { "Content-Type": "application/json" },
+            headers: {
+                "Content-Type": "application/json",
+                "authorization": token  // ← add token
+            },
             body: JSON.stringify(updatedChurch)
         })
 
@@ -221,7 +237,7 @@ if (saveBtn) {
 const addChurchSaveBtn = document.getElementById("add-church-save-btn")
 
 if (addChurchSaveBtn) {
-    if (localStorage.getItem("isAdmin") !== "true") {
+    if (!localStorage.getItem("adminToken")) {  // ← updated
         window.location.href = "/admin/login"
     }
 
@@ -229,6 +245,7 @@ if (addChurchSaveBtn) {
         const name = document.getElementById("add-name").value
         const location = document.getElementById("add-location").value
         const address = document.getElementById("add-address").value
+        const token = localStorage.getItem("adminToken")  // ← add token
 
         if (!name || !location || !address) {
             alert("⚠️ Nama, lokasi dan alamat harus diisi!")
@@ -253,7 +270,10 @@ if (addChurchSaveBtn) {
 
         await fetch("/churches", {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            headers: {
+                "Content-Type": "application/json",
+                "authorization": token  // ← add token
+            },
             body: JSON.stringify(newChurch)
         })
 
