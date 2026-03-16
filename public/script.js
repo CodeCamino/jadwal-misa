@@ -73,21 +73,25 @@ function toggleShowAll() {
 function renderSchedule(churches) {
     const scheduleBody = document.getElementById("schedule-body")
     scheduleBody.innerHTML = ""
-    const days = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"]
     
+    // Get today's day
+    const today = new Date()
+    const dayIndex = today.getDay() // 0=Sunday, 1=Monday, ...
+    const days = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"]
+    const todayKey = days[dayIndex]
+
     for (let i = 0; i < churches.length; i++) {
-        for (let d = 0; d < days.length; d++) {
-            const daySchedule = churches[i].schedule[days[d]] || []
-            for (let j = 0; j < daySchedule.length; j++) {
-                scheduleBody.innerHTML += `
-                    <tr>
-                        <td>${churches[i].name}</td>
-                        <td>${churches[i].location}</td>
-                        <td>${daySchedule[j]}</td>
-                        <td><button class="detail-btn">Detail</button></td>
-                    </tr>
-                `
-            }
+        const todaySchedule = churches[i].schedule[todayKey] || []
+        
+        for (let j = 0; j < todaySchedule.length; j++) {
+            scheduleBody.innerHTML += `
+                <tr>
+                    <td>${churches[i].name}</td>
+                    <td>${churches[i].location}</td>
+                    <td>${todaySchedule[j]}</td>
+                    <td><button class="detail-btn">Detail</button></td>
+                </tr>
+            `
         }
     }
 }
@@ -104,30 +108,33 @@ tabs.forEach(function(tab) {
 function filterSchedule(filter) {
     const scheduleBody = document.getElementById("schedule-body")
     scheduleBody.innerHTML = ""
+    
+    const today = new Date()
+    const dayIndex = today.getDay()
     const days = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"]
+    const todayKey = days[dayIndex]
 
     for (let i = 0; i < allChurches.length; i++) {
-        for (let d = 0; d < days.length; d++) {
-            const daySchedule = allChurches[i].schedule[days[d]] || []
-            for (let j = 0; j < daySchedule.length; j++) {
-                const time = daySchedule[j]
-                const hour = parseInt(time.split(":")[0])
-                let show = false
-                if (filter === "Semua") show = true
-                else if (filter === "Pagi" && hour >= 6 && hour < 12) show = true
-                else if (filter === "Siang" && hour >= 12 && hour < 15) show = true
-                else if (filter === "Sore" && hour >= 15 && hour < 18) show = true
-                else if (filter === "Malam" && hour >= 18) show = true
-                if (show) {
-                    scheduleBody.innerHTML += `
-                        <tr>
-                            <td>${allChurches[i].name}</td>
-                            <td>${allChurches[i].location}</td>
-                            <td>${time}</td>
-                            <td><button class="detail-btn">Detail</button></td>
-                        </tr>
-                    `
-                }
+        const todaySchedule = allChurches[i].schedule[todayKey] || []
+        
+        for (let j = 0; j < todaySchedule.length; j++) {
+            const time = todaySchedule[j]
+            const hour = parseInt(time.split(":")[0])
+            let show = false
+            if (filter === "Semua") show = true
+            else if (filter === "Pagi" && hour >= 6 && hour < 12) show = true
+            else if (filter === "Siang" && hour >= 12 && hour < 15) show = true
+            else if (filter === "Sore" && hour >= 15 && hour < 18) show = true
+            else if (filter === "Malam" && hour >= 18) show = true
+            if (show) {
+                scheduleBody.innerHTML += `
+                    <tr>
+                        <td>${allChurches[i].name}</td>
+                        <td>${allChurches[i].location}</td>
+                        <td>${time}</td>
+                        <td><button class="detail-btn">Detail</button></td>
+                    </tr>
+                `
             }
         }
     }
@@ -141,3 +148,19 @@ async function getChurches() {
 }
 
 getChurches()
+
+// Show today's date
+function showTodayDate() {
+    const today = new Date()
+    const options = { 
+        weekday: 'long', 
+        year: 'numeric', 
+        month: 'long', 
+        day: 'numeric',
+        locale: 'id-ID'
+    }
+    const dateStr = today.toLocaleDateString('id-ID', options)
+    document.getElementById("today-date").innerHTML = "📅 " + dateStr
+}
+
+showTodayDate()
