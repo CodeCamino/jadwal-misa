@@ -73,16 +73,21 @@ function toggleShowAll() {
 function renderSchedule(churches) {
     const scheduleBody = document.getElementById("schedule-body")
     scheduleBody.innerHTML = ""
+    const days = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"]
+    
     for (let i = 0; i < churches.length; i++) {
-        for (let j = 0; j < churches[i].schedule.length; j++) {
-            scheduleBody.innerHTML += `
-                <tr>
-                    <td>${churches[i].name}</td>
-                    <td>${churches[i].location}</td>
-                    <td>${churches[i].schedule[j]}</td>
-                    <td><button class="detail-btn">Detail</button></td>
-                </tr>
-            `
+        for (let d = 0; d < days.length; d++) {
+            const daySchedule = churches[i].schedule[days[d]] || []
+            for (let j = 0; j < daySchedule.length; j++) {
+                scheduleBody.innerHTML += `
+                    <tr>
+                        <td>${churches[i].name}</td>
+                        <td>${churches[i].location}</td>
+                        <td>${daySchedule[j]}</td>
+                        <td><button class="detail-btn">Detail</button></td>
+                    </tr>
+                `
+            }
         }
     }
 }
@@ -99,32 +104,37 @@ tabs.forEach(function(tab) {
 function filterSchedule(filter) {
     const scheduleBody = document.getElementById("schedule-body")
     scheduleBody.innerHTML = ""
+    const days = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"]
+
     for (let i = 0; i < allChurches.length; i++) {
-        for (let j = 0; j < allChurches[i].schedule.length; j++) {
-            const time = allChurches[i].schedule[j]
-            const hour = parseInt(time.split(":")[0])
-            let show = false
-            if (filter === "Semua") show = true
-            else if (filter === "Pagi" && hour >= 6 && hour < 12) show = true
-            else if (filter === "Siang" && hour >= 12 && hour < 15) show = true
-            else if (filter === "Sore" && hour >= 15 && hour < 18) show = true
-            else if (filter === "Malam" && hour >= 18) show = true
-            if (show) {
-                scheduleBody.innerHTML += `
-                    <tr>
-                        <td>${churches[i].name}</td>
-                        <td>${allChurches[i].location}</td>
-                        <td>${time}</td>
-                        <td><button class="detail-btn">Detail</button></td>
-                    </tr>
-                `
+        for (let d = 0; d < days.length; d++) {
+            const daySchedule = allChurches[i].schedule[days[d]] || []
+            for (let j = 0; j < daySchedule.length; j++) {
+                const time = daySchedule[j]
+                const hour = parseInt(time.split(":")[0])
+                let show = false
+                if (filter === "Semua") show = true
+                else if (filter === "Pagi" && hour >= 6 && hour < 12) show = true
+                else if (filter === "Siang" && hour >= 12 && hour < 15) show = true
+                else if (filter === "Sore" && hour >= 15 && hour < 18) show = true
+                else if (filter === "Malam" && hour >= 18) show = true
+                if (show) {
+                    scheduleBody.innerHTML += `
+                        <tr>
+                            <td>${allChurches[i].name}</td>
+                            <td>${allChurches[i].location}</td>
+                            <td>${time}</td>
+                            <td><button class="detail-btn">Detail</button></td>
+                        </tr>
+                    `
+                }
             }
         }
     }
 }
 
 async function getChurches() {
-    const response = await fetch("http://localhost:3000/churches")
+    const response = await fetch("/churches")
     allChurches = await response.json()
     renderChurches(allChurches)
     renderSchedule(allChurches)
