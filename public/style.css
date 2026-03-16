@@ -1,0 +1,313 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+}
+
+nav {
+    background: #2c1810;
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    padding: 15px 30px;
+    border-bottom: 1px solid #ffd700;
+   
+
+}
+
+.nav-left h1 {
+    color: #ffd700;
+    font-size: 1rem;
+    align-items: center;
+
+}
+.nav-left a {
+    text-decoration: none;
+    color: #FFD700;
+}
+
+.nav-right {
+    display: flex;
+   align-items: center;
+    gap: 20px;
+}
+
+.nav-right a {
+    color: white;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.hero {
+    background: #2c1810;
+    text-align: center;
+    padding: 80px 20px;
+}
+.hero h2 {
+    color: white;
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.hero p {
+    color: white;
+    margin-bottom: 20px;
+}
+
+.hero-search {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.hero-search input {
+    padding: 12px 20px;
+    width: 400px;
+    border: none;
+    border-radius: 20px;
+    font-size: 1rem;
+}
+
+.hero-search button {
+    padding: 12px 24px;
+    background: #ffd700;
+    color:#2c1810;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+#search-btn:hover {
+    background-color: darkred;
+    color: white;
+
+}
+
+.church-section{
+    padding: 40px 30px;
+    background:#FFF8E7;
+}
+
+.section-title {
+    font-size: 1.2rem;
+    color: #2C1810;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #ffd700;
+    padding-bottom: 8px;
+
+}
+
+#churchList-el {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.church-card {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    width: 300px;
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+    border-top: 3px solid #FFD700;
+}
+
+.church-card h2 {
+    font-size: 1rem;
+    margin-bottom: 8px;
+    color: #2C1810;
+}
+
+.church-card p {
+    font-size: 0.85rem;
+    color: #666666;
+    margin-bottom: 5px;
+}
+
+.church-card button {
+    padding: 4px 16px;
+    background:none;
+    color: #666666;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    padding: 0;
+    margin-top: 8px;
+    text-align: left;
+}
+
+.church-card button:hover {
+    color: #8B0000;
+    text-decoration: underline;
+}
+
+#show-more-btn {
+    background: none;
+    border: 2px solid #8B0000;
+    color: #8B0000;
+    padding: 10px 30px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+#show-more-btn:hover {
+    background: #8B0000;
+    color: white;
+}
+
+.schedule-section {
+    padding: 40px 30px;
+    background: white;
+}
+
+/* Filter tabs */
+.filter-tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.tab {
+    padding: 8px 20px;
+    border: 1px solid #2C1810;
+    background: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    color: #2C1810;
+}
+
+.tab.active {
+    background: #2C1810;
+    color: white;
+}
+
+.tab:hover {
+    background: #2C1810;
+    color: white;
+}
+
+/* Table */
+#schedule-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#schedule-table th {
+    background: #2C1810;
+    color: white;
+    padding: 12px 15px;
+    text-align: left;
+    font-size: 0.9rem;
+}
+
+#schedule-table td {
+    padding: 12px 15px;
+    font-size: 0.9rem;
+    border-bottom: 1px solid #eeeeee;
+}
+
+#schedule-table tr:hover {
+    background: #FFF8E7;
+}
+
+.detail-btn {
+    padding: 6px 14px;
+    background: #2C1810;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.8rem;
+}
+
+.detail-btn:hover {
+    background: #FFD700;
+    color: #2C1810;
+}
+
+footer {
+    background: #2C1810;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    font-size: 0.85rem;
+}
+
+footer a {
+    color: #FFD700;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+#suggestions {
+    position: absolute;
+    background: white;
+    width: 400px;
+    border:none;
+    border-radius: 10px;
+    margin-top: 5px;
+    z-index: 100;
+}
+
+.suggestion-item {
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    color: #2C1810;
+}
+
+.suggestion-item:hover {
+    background: #FFF8E7;
+}
+
+.detail-section {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px 30px;
+}
+
+.detail-section h2 {
+    font-size: 1.8rem;
+    color: #2C1810;
+    margin-bottom: 10px;
+}
+
+.detail-section p {
+    font-size: 1rem;
+    color: #666666;
+    margin-bottom: 8px;
+}
+
+.schedule-box {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 20px;
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+    border-top: 3px solid #FFD700;
+}
+
+.schedule-box h3 {
+    color: #2C1810;
+    margin-bottom: 15px;
+    font-size: 1rem;
+}
+
+.schedule-box ul {
+    list-style: none;
+    padding: 0;
+}
+
+.schedule-box ul li {
+    padding: 8px 0;
+    border-bottom: 1px solid #eeeeee;
+    color: #2C1810;
+    font-size: 0.95rem;
+}

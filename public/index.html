@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 1.Navbar -->
+    <nav>
+      <div class="nav-left">
+        <h1><a href="/">Jadwal Misa</a></h1>
+      </div>
+      <div class="nav-right">
+        <a href="#cari-gereja">Cari Gereja</a>
+        <a href="#jadwal-misa">Jadwal</a>
+        <a href="#">Berita</a>
+        <a href="#">Masuk</a>
+      </div>
+    </nav>
+
+    <!-- 2. Hero section -->
+    <section class="hero">
+      <h2>Temukan Jadwal Misa</h2>
+      <p>Untuk sementara hanya kevikepan Manado</p>
+      <div class="hero-search">
+        <input type="text" placeholder="Cari Gereja" id="search-input" />
+        <button id="search-btn">Cari</button>
+      </div>
+      <div id="suggestions"></div>
+    </section>
+    <!-- 3 church-section -->
+    <section class="church-section" id="cari-gereja">
+      <h2 class="section-title">Gereja Terdekat</h2>
+      <div id="churchList-el"></div>
+    </section>
+
+    <!--Schedule section-->
+    <section class="schedule-section" id="jadwal-misa">
+      <h2 class="section-title">Jadwal Misa Hari Ini</h2>
+      <div class="filter-tabs">
+        <button class="tab active">Semua</button>
+        <button class="tab">Pagi</button>
+        <button class="tab">Siang</button>
+        <button class="tab">Sore</button>
+        <button class="tab">Malam</button>
+      </div>
+      <table id="schedule-table">
+        <thead>
+          <tr>
+            <th>Gereja</th>
+            <th>Kota</th>
+            <th>Waktu</th>
+            <th>Aksi</th>
+          </tr>
+        </thead>
+        <tbody id="schedule-body"></tbody>
+      </table>
+    </section>
+
+    <!-- 5. Footer -->
+    <footer>
+      <p>
+        © 2025 JadwalMisa.id | <a href="#">Tentang</a> |
+        <a href="#">Kontak</a> |
+        <a href="#">Privasi</a>
+      </p>
+    </footer>
+    <script src="script.js"></script>
+  </body>
+</html>

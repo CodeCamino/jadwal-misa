@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/admin/admin.css" />
+    <title>Tambah Gereja - Admin</title>
+  </head>
+  <body>
+    <!-- Admin Navbar -->
+    <nav class="admin-nav">
+      <h1>⛪ Admin Panel</h1>
+      <button id="logout-btn">Logout</button>
+    </nav>
+
+    <!-- Add Form -->
+    <div class="admin-container">
+      <div class="admin-header">
+        <h2>Tambah Gereja Baru</h2>
+        <a href="/admin">← Kembali</a>
+      </div>
+
+      <div class="edit-form">
+        <!-- Basic Info -->
+        <h3 class="schedule-title">Informasi Gereja</h3>
+        <div class="form-group">
+          <label>Nama Gereja</label>
+          <input
+            type="text"
+            id="add-name"
+            placeholder="Gereja Katedral Manado"
+          />
+        </div>
+        <div class="form-group">
+          <label>Lokasi</label>
+          <input type="text" id="add-location" placeholder="Manado" />
+        </div>
+        <div class="form-group">
+          <label>Alamat</label>
+          <input
+            type="text"
+            id="add-address"
+            placeholder="Jl. Sam Ratulangi No.1"
+          />
+        </div>
+
+        <!-- Schedule -->
+        <h3 class="schedule-title">Jadwal Misa Regular</h3>
+        <div class="form-group">
+          <label>Minggu</label>
+          <input
+            type="text"
+            id="add-sunday"
+            placeholder="06:00, 09:00, 17:00"
+          />
+        </div>
+        <div class="form-group">
+          <label>Senin</label>
+          <input
+            type="text"
+            id="add-monday"
+            placeholder="18:00 (kosongkan jika tidak ada)"
+          />
+        </div>
+        <div class="form-group">
+          <label>Selasa</label>
+          <input type="text" id="add-tuesday" placeholder="18:00" />
+        </div>
+        <div class="form-group">
+          <label>Rabu</label>
+          <input type="text" id="add-wednesday" placeholder="18:00" />
+        </div>
+        <div class="form-group">
+          <label>Kamis</label>
+          <input type="text" id="add-thursday" placeholder="18:00" />
+        </div>
+        <div class="form-group">
+          <label>Jumat</label>
+          <input type="text" id="add-friday" placeholder="18:00" />
+        </div>
+        <div class="form-group">
+          <label>Sabtu</label>
+          <input type="text" id="add-saturday" placeholder="06:00, 17:00" />
+        </div>
+
+        <button id="add-church-save-btn">💾 Simpan Gereja</button>
+      </div>
+    </div>
+
+    <script src="/admin/admin.js"></script>
+  </body>
+</html>

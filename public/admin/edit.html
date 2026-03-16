@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/admin/admin.css" />
+    <title>Edit Gereja - Admin</title>
+  </head>
+  <body>
+    <!-- Admin Navbar -->
+    <nav class="admin-nav">
+      <h1>⛪ Admin Panel</h1>
+      <button id="logout-btn">Logout</button>
+    </nav>
+
+    <!-- Edit Form -->
+    <div class="admin-container">
+      <div class="admin-header">
+        <h2>Edit Gereja</h2>
+        <a href="/admin">← Kembali</a>
+      </div>
+
+      <div class="edit-form">
+        <!-- Basic Info -->
+        <h3 class="schedule-title">Informasi Gereja</h3>
+        <div class="form-group">
+          <label>Nama Gereja</label>
+          <input type="text" id="edit-name" />
+        </div>
+        <div class="form-group">
+          <label>Lokasi</label>
+          <input type="text" id="edit-location" />
+        </div>
+        <div class="form-group">
+          <label>Alamat</label>
+          <input type="text" id="edit-address" />
+        </div>
+
+        <!-- Regular Schedule -->
+        <h3 class="schedule-title">Jadwal Misa Regular</h3>
+        <div class="form-group">
+          <label>Minggu</label>
+          <input
+            type="text"
+            id="edit-sunday"
+            placeholder="06:00, 09:00, 17:00"
+          />
+        </div>
+        <div class="form-group">
+          <label>Senin</label>
+          <input
+            type="text"
+            id="edit-monday"
+            placeholder="18:00 (kosongkan jika tidak ada)"
+          />
+        </div>
+        <div class="form-group">
+          <label>Selasa</label>
+          <input type="text" id="edit-tuesday" placeholder="18:00" />
+        </div>
+        <div class="form-group">
+          <label>Rabu</label>
+          <input type="text" id="edit-wednesday" placeholder="18:00" />
+        </div>
+        <div class="form-group">
+          <label>Kamis</label>
+          <input type="text" id="edit-thursday" placeholder="18:00" />
+        </div>
+        <div class="form-group">
+          <label>Jumat</label>
+          <input type="text" id="edit-friday" placeholder="18:00" />
+        </div>
+        <div class="form-group">
+          <label>Sabtu</label>
+          <input type="text" id="edit-saturday" placeholder="06:00, 17:00" />
+        </div>
+
+        <!-- Extra Schedule -->
+        <h3 class="schedule-title">Jadwal Misa Tambahan</h3>
+        <div id="extra-schedule-list"></div>
+        <div class="extra-form">
+          <div class="form-group">
+            <label>Judul</label>
+            <input
+              type="text"
+              id="extra-title"
+              placeholder="Misa Natal, Pekan Suci, dll"
+            />
+          </div>
+          <div class="form-group">
+            <label>Tanggal</label>
+            <input type="text" id="extra-date" placeholder="24 Desember 2025" />
+          </div>
+          <div class="form-group">
+            <label>Waktu</label>
+            <input type="text" id="extra-time" placeholder="23:00" />
+          </div>
+          <button id="add-extra-btn">+ Tambah Jadwal</button>
+        </div>
+
+        <button id="save-btn">💾 Simpan Perubahan</button>
+      </div>
+    </div>
+
+    <script src="/admin/admin.js"></script>
+  </body>
+</html>

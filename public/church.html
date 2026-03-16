@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/style.css" />
+    <title>Detail Gereja</title>
+  </head>
+  <body>
+    <nav>
+      <div class="nav-left">
+        <a href="/">
+          <h1>Jadwal Misa</h1>
+        </a>
+      </div>
+      <div class="nav-right">
+        <a href="/">Cari Gereja</a>
+        <a href="/">Jadwal</a>
+        <a href="#">Berita</a>
+        <a href="#">Masuk</a>
+      </div>
+    </nav>
+    <section class="detail-section">
+      <h2 id="church-name"></h2>
+      <p id="church-location">📍</p>
+      <p id="church-address">🏠</p>
+      <div class="schedule-box">
+        <h3>Jadwal Misa Regular</h3>
+        <ul id="church-schedule"></ul>
+      </div>
+      <div class="schedule-box" id="extra-box">
+        <h3>Jadwal Misa Tambahan</h3>
+        <ul id="church-extra"></ul>
+      </div>
+    </section>
+    <script src="/church.js"></script>
+  </body>
+</html>
